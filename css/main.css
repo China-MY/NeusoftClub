@@ -1,0 +1,68 @@
+body {
+	margin: 0px;
+}
+
+/* 
+ 页面布局添加样式
+ 类选择器语法 .类名
+ */
+
+.container {
+	/* 弹性盒子 */
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100vh;
+}
+
+/* 头部栏添加样式 */
+.header {
+	flex: 0 0 40px;
+	background-color: #373d41;
+	display: flex;
+	/* 内部文本两端对齐 */
+	justify-content: space-between;
+	align-items: center;
+	/* 文字颜色 */
+	color: #fff;
+	user-select: none;
+}
+
+/* 底部栏的样式 */
+.footer {
+	flex: 0 0 30px;
+	text-align: center;
+	line-height: 30px;
+	font-size: 8px;
+	color: #333744;
+}
+
+/* 左侧菜单栏样式 */
+.aside {
+	background-color: #333744;
+	width: 240px;
+}
+
+/* 右侧显示区域的样式 */
+.main {
+	active-text-color: "#ffd04b";
+	/* background-color: #ffffff; */
+	text-color: #fff;
+}
+
+/* 补充css */
+.header div{
+	display: flex;
+	align-items: center;
+}
+
+.header div h1{
+	font-weight: 500;
+	font-size: 22px;
+	letter-spacing: 1px;
+}
+
+.header div p {
+	font-size: 14px;
+	margin-right: 30px;
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>熙心健康体检系统</title>
+		<!-- 引入Vue3 -->
+		<script src="js/vue.global.prod.js"></script>
+		<!-- 引入Element-Plus -->
+		<script src="js/element-plus.js"></script>
+		<!-- 引入ICON图标 -->
+		<script src="js/element-icons.js"></script>
+		<!-- 引入Element-Plus样式 -->
+		<link rel="stylesheet" href="css/element-plus.css" />
+		<!-- 引入项目Css文件 -->
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.iframe {
+				border: 0px solid;
+				width: 100%;
+				height: 99%;
+				margin: 0px;
+			}
+
+			a {
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 初始化容器 -->
+		<div id="app">
+			<!-- 初始化页面布局 -->
+			<el-container class="container">
+				<!-- 头部 -->
+				<el-header class="header">
+					<!-- 左侧区域 -->
+					<div>
+						<!-- 图标 -->
+						<el-icon>
+							<Phone />
+						</el-icon>
+						<!-- 标题 -->
+						<h1 style="margin-left: 10px;">熙心健康体检系统</h1>
+					</div>
+					<!-- 右侧区域 -->
+					<div>
+						<!-- 文本显示 -->
+						<p>系统管理员:admin</p>
+						<!-- 按钮 -->
+						<el-button type="danger" size="small">OUT</el-button>
+					</div>
+				</el-header>
+				<el-container>
+					<!-- 左侧列表区 -->
+					<el-aside class="aside">
+						<!-- 左侧菜单 -->
+						<el-menu active-text-color="#ffd04b" background-color="#333744" class="el-menu-vertical-demo"
+							default-active="1" text-color="#fff" @open="handleOpen" @close="handleClose">
+							<a href="./view/welcome.html" target="myframe">
+								<el-menu-item index="1">
+									<el-icon>
+										<Location />
+									</el-icon>
+									<span>首页</span>
+								</el-menu-item>
+							</a>
+							<a href="./view/checkbooking.html" target="myframe">
+								<el-menu-item index="2">
+									<el-icon>
+										<Headset />
+									</el-icon>
+									<span>体检预约</span>
+								</el-menu-item>
+							</a>
+							<a href="./view/bookinglist.html" target="myframe">
+								<el-menu-item index="3">
+									<el-icon>
+										<Fold />
+									</el-icon>
+									<span>预约列表</span>
+								</el-menu-item>
+							</a>
+							<a href="./view/checkuserselect.html" target="myframe">
+								<el-menu-item index="4">
+									<el-icon>
+										<Document />
+									</el-icon>
+									<span>体检客户查询</span>
+								</el-menu-item>
+							</a>
+						</el-menu>
+					</el-aside>
+					<el-container>
+						<!-- 主文本区 -->
+						<el-main class="main">
+							<!-- 显示子页面的视图区域 -->
+							<iframe name="myframe" class="iframe" src="./view/welcome.html"></iframe>
+						</el-main>
+						<!-- 底部区域 -->
+						<el-footer class="footer">
+							&copy;2025&nbsp;版权所有&nbsp;东软集团&nbsp;www.nuesoft.com
+						</el-footer>
+					</el-container>
+				</el-container>
+			</el-container>
+		</div>
+	</body>
+	<script>
+		const App = {
+			data() {
+				return {}
+			},
+			methods: {}
+		};
+		const app = Vue.createApp(App);
+		app.use(ElementPlus);
+		// 引用icon图标
+		app.component("Phone", ElementPlusIconsVue.Phone);
+		app.component("Location", ElementPlusIconsVue.Location);
+		app.component("Headset", ElementPlusIconsVue.Headset);
+		app.component("Fold", ElementPlusIconsVue.Fold);
+		app.component("Document", ElementPlusIconsVue.Document);
+		app.mount("#app");
+	</script>
+</html>

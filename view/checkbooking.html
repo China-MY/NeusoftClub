@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>熙心健康体检系统</title>
+		<!-- 引入Vue3 -->
+		<script src="../js/vue.global.prod.js"></script>
+		<!-- 引入Element-Plus -->
+		<script src="../js/element-plus.js"></script>
+		<!-- 引入ICON图标 -->
+		<script src="../js/element-icons.js"></script>
+		<!-- 引入Element-Plus样式 -->
+		<link rel="stylesheet" href="../css/element-plus.css" />
+		<style>
+			.infodiv {
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<el-breadcrumb separator="/">
+				<el-breadcrumb-item>预约</el-breadcrumb-item>
+				<el-breadcrumb-item>体检预约</el-breadcrumb-item>
+			</el-breadcrumb>
+			<!-- 按钮 -->
+			<div style="margin-top: 10px;">
+				<!-- 预约 -->
+				<el-button type="primary" plain>预约</el-button>
+				<!-- 重置 -->
+				<el-button type="primary" plain>重置</el-button>
+			</div>
+			<!-- 基本信息 -->
+			<div class="infodiv">
+				<el-descriptions class="margin-top" title="基本信息" :column="3" :size="size" border>
+					<!-- 体检单号 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Document />
+								</el-icon>
+								体检单号
+							</div>
+						</template>
+						<el-input v-model="jbinfo.tijiandanhao" style="width: 240px" disabled
+							placeholder="32000000000000" />
+					</el-descriptions-item>
+					<!-- 姓名 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<User />
+								</el-icon>
+								姓名
+							</div>
+						</template>
+						<el-input v-model="jbinfo.username" style="width: 240px" placeholder="输入姓名" />
+					</el-descriptions-item>
+					<!-- 性别 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Coordinate />
+								</el-icon>
+								性别
+							</div>
+						</template>
+						<el-select v-model="yyinfo.xbvalue" placeholder="请选择">
+							<el-option v-for="item in xboptions" :key="item.value" :label="item.label"
+								:value="item.value">
+							</el-option>
+						</el-select>
+					</el-descriptions-item>
+					<!-- 手机号 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Phone />
+								</el-icon>
+								手机号
+							</div>
+						</template>
+						<el-input v-model="jbinfo.phone" style="width: 240px" placeholder="输入手机号" />
+					</el-descriptions-item>
+					<!-- 出生日期 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Calendar />
+								</el-icon>
+								出生日期
+							</div>
+						</template>
+						<div class="block">
+							<el-date-picker v-model="jbinfo.datevalue" type="date" placeholder="选择日期" :size="size" />
+						</div>
+					</el-descriptions-item>
+					<!-- 身份证号 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Postcard />
+								</el-icon>
+								身份证号
+							</div>
+						</template>
+						<el-input v-model="jbinfo.idcard" style="width: 240px" placeholder="输入身份证号码" />
+					</el-descriptions-item>
+					<!-- 家庭住址 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Location />
+								</el-icon>
+								家庭住址
+							</div>
+						</template>
+						<el-input v-model="jbinfo.arss" style="width: 100%" placeholder="输入家庭住址 格式:省-市-区" />
+					</el-descriptions-item>
+				</el-descriptions>
+			</div>
+			<!-- 预约信息 -->
+			<div class="infodiv">
+				<el-descriptions class="margin-top" title="预约信息" :column="1" :size="size" border>
+					<!-- 预约院区 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Location />
+								</el-icon>
+								预约院区
+							</div>
+						</template>
+						<el-select v-model="yyinfo.yqvalue" placeholder="选择院区地址">
+							<el-option v-for="item in yqoptions" :key="item.value" :label="item.label"
+								:value="item.value">
+							</el-option>
+						</el-select>
+					</el-descriptions-item>
+					<!-- 院区描述 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Phone />
+								</el-icon>
+								院区描述
+							</div>
+						</template>
+						营业时间：周一至周六 7:30-11:30
+						<br />
+						采血截止:10:30
+						<br />
+						联系电话:4006297568
+						<br />
+						地址:沈阳市浑南区创新路175号(智慧大街交互处)
+					</el-descriptions-item>
+				</el-descriptions>
+			</div>
+			<!-- 预约详情 -->
+			<div class="infodiv">
+				<el-descriptions class="margin-top" title="预约详情" :column="3" :size="size" border>
+					<!-- 预约类型 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Document />
+								</el-icon>
+								预约类型
+							</div>
+						</template>
+						<el-select v-model="yyinfo.xbvalue" placeholder="预约类型">
+							<el-option v-for="item in xboptions" :key="item.value" :label="item.label"
+								:value="item.value">
+							</el-option>
+						</el-select>
+					</el-descriptions-item>
+					<!-- 预约套餐 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<User />
+								</el-icon>
+								预约套餐
+							</div>
+						</template>
+						<el-select v-model="yyinfo.xbvalue" placeholder="预约套餐">
+							<el-option v-for="item in xboptions" :key="item.value" :label="item.label"
+								:value="item.value">
+							</el-option>
+						</el-select>
+					</el-descriptions-item>
+					<!-- 体检时间 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Calendar />
+								</el-icon>
+								体检时间
+							</div>
+						</template>
+						<div class="block">
+							<el-date-picker v-model="jbinfo.datevalue" type="date" placeholder="选择日期" :size="size" />
+						</div>
+					</el-descriptions-item>
+					<!-- 体检时段 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<User />
+								</el-icon>
+								体检时段
+							</div>
+						</template>
+						<el-select v-model="yyinfo.xbvalue" placeholder="体检时段">
+							<el-option v-for="item in xboptions" :key="item.value" :label="item.label"
+								:value="item.value">
+							</el-option>
+						</el-select>
+					</el-descriptions-item>
+					<!-- 套餐价格 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Document />
+								</el-icon>
+								体检单号
+							</div>
+						</template>
+						<el-input v-model="jbinfo.tijiandanhao" style="width: 240px" disabled placeholder="1500" />
+					</el-descriptions-item>
+					<!-- 优惠补贴 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Document />
+								</el-icon>
+								体检单号
+							</div>
+						</template>
+						<el-input v-model="jbinfo.tijiandanhao" style="width: 240px" disabled placeholder="400" />
+					</el-descriptions-item>
+					<!-- 结算金额 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Document />
+								</el-icon>
+								体检单号
+							</div>
+						</template>
+						<el-input v-model="jbinfo.tijiandanhao" style="width: 240px" disabled placeholder="1100" />
+					</el-descriptions-item>
+					<!-- 结算类别 -->
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<User />
+								</el-icon>
+								结算类别
+							</div>
+						</template>
+						<el-select v-model="yyinfo.xbvalue" placeholder="结算类别">
+							<el-option v-for="item in xboptions" :key="item.value" :label="item.label"
+								:value="item.value">
+							</el-option>
+						</el-select>
+					</el-descriptions-item>
+
+
+				</el-descriptions>
+			</div>
+			<!-- 套餐详情 -->
+			<div class="infodiv">
+				<el-descriptions title="套餐详情" direction="vertical" :column="4" border>
+					<el-descriptions-item label="检查项目">肺部CT</el-descriptions-item>
+					<el-descriptions-item label="检查内容">CT检查【肺部-平扫】</el-descriptions-item>
+					<el-descriptions-item label="检查意义" :span="2">用于检查肺部有无良性恶性肿瘤，结核，炎症和间质性，弥漫性病变等。</el-descriptions-item>
+					<el-descriptions-item label="检查项目">头部CT</el-descriptions-item>
+					<el-descriptions-item label="检查内容">头颅骨CT</el-descriptions-item>
+					<el-descriptions-item label="检查意义" :span="2">CT检查头部影像</el-descriptions-item>
+					<el-descriptions-item label="检查项目">肿瘤两项</el-descriptions-item>
+					<el-descriptions-item label="检查内容">癌胚抗原测定(定量),甲胎蛋白测定</el-descriptions-item>
+					<el-descriptions-item label="检查意义" :span="2">
+						癌胚抗原:系广谱性肿瘤标志物，对大肠瘟、胰腺的查、疗效观察和预后评估有重要的临床意义。
+						<br />
+						在胃、乳腺、肺痘等也可升高。 甲胎蛋白:对原发性肝癌的诊断、疗效观察和预后评估有重要的临床意义,
+						<br />
+						在卵巢、胃、胰腺瘟、睾丸癌等肿瘤及肝炎、肝硬化等疾病也有异常发现。孕期可出现升高。
+					</el-descriptions-item>
+					<el-descriptions-item label="检查项目">C13呼气试验</el-descriptions-item>
+					<el-descriptions-item label="检查内容">C13呼气试验</el-descriptions-item>
+					<el-descriptions-item label="检查意义" :span="2">
+						空腹，一个月以内使用过抗生素和胃药者不宜做此检查。
+						<br />
+						13碳-尿素呼气试验阳性示有幽门螺杆菌感染，它与胃部炎症、消化性溃疡、胃症的发生密切关联。
+					</el-descriptions-item>
+					<el-descriptions-item label="检查项目">甲功三项</el-descriptions-item>
+					<el-descriptions-item label="检查内容">血清游离甲状腺素测定</el-descriptions-item>
+					<el-descriptions-item label="检查意义" :span="2">判断甲状腺功能，鉴别免疫性疾病</el-descriptions-item>
+					<el-descriptions-item label="检查项目">颈动脉彩超</el-descriptions-item>
+					<el-descriptions-item label="检查内容">彩色多普勒超声检查【颈动脉】</el-descriptions-item>
+					<el-descriptions-item label="检查意义" :span="2">
+						通过彩色超声仪器采用无创性检査方法，检测颈动脉结构和动脉粥样硬化斑形态、范围、性质、动脉狭窄程度等;
+						<br />
+						早期发现动脉血管病变，为有效预防和减少冠心病、缺血性脑血管病等心脑血管疾病发病提供客观的血流动力学依据。
+					</el-descriptions-item>
+				</el-descriptions>
+			</div>
+		</div>
+	</body>
+	<script>
+		const App = {
+			data() {
+				return {
+					xboptions: [{
+						value: '1',
+						label: '男'
+					}, {
+						value: '2',
+						label: '女'
+					}],
+					yqoptions: [{
+						value: '1',
+						label: '一院'
+					}, {
+						value: '2',
+						label: '二院'
+					}],
+					jbinfo: {
+						tijiandanhao: "",
+						username: "",
+						phone: "",
+						datevalue: '',
+						idcard: "",
+						arss: ""
+					},
+					yyinfo: {
+						xbvalue: '',
+						yqvalue: '',
+					},
+				}
+			},
+			methods: {
+
+			}
+		};
+		const app = Vue.createApp(App);
+		app.use(ElementPlus);
+		// 引用icon图标
+		app.component("Phone", ElementPlusIconsVue.Phone);
+		app.component("Location", ElementPlusIconsVue.Location);
+		app.component("Document", ElementPlusIconsVue.Document);
+		app.component("User", ElementPlusIconsVue.User);
+		app.component("Calendar", ElementPlusIconsVue.Calendar);
+		app.component("Postcard", ElementPlusIconsVue.Postcard);
+		app.component("Coordinate", ElementPlusIconsVue.Coordinate);
+		app.mount("#app");
+	</script>
+</html>

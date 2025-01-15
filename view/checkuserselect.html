@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>熙心健康体检系统</title>
+		<!-- 引入Vue3 -->
+		<script src="../js/vue.global.prod.js"></script>
+		<!-- 引入Element-Plus -->
+		<script src="../js/element-plus.js"></script>
+		<!-- 引入ICON图标 -->
+		<script src="../js/element-icons.js"></script>
+		<!-- 引入Element-Plus样式 -->
+		<link rel="stylesheet" href="../css/element-plus.css" />
+	</head>
+	<body>
+
+		<div id="app">
+			<el-breadcrumb separator="/">
+				<el-breadcrumb-item>体验信息录入</el-breadcrumb-item>
+			</el-breadcrumb>
+
+			<div style="margin: 10px 0;">
+
+				<el-descriptions class="margin-top" title="体验信息查询" :column="1" :size="size" border>
+					<template #extra>
+						<el-button type="primary">查询</el-button>
+					</template>
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Tickets />
+								</el-icon>
+								订单编号
+							</div>
+						</template>
+						<el-input placeholder="输入体验编号"></el-input>
+					</el-descriptions-item>
+
+				</el-descriptions>
+
+			</div>
+
+
+			<div>
+
+				<el-descriptions class="margin-top" title="客户基本信息" :column="3" :size="size" border>
+
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Tickets />
+								</el-icon>
+								订单编号
+							</div>
+						</template>
+						202310253212565
+					</el-descriptions-item>
+
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Tickets />
+								</el-icon>
+								手机号
+							</div>
+						</template>
+						213100000000
+					</el-descriptions-item>
+
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Tickets />
+								</el-icon>
+								姓名
+							</div>
+						</template>
+						张一山
+					</el-descriptions-item>
+
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Tickets />
+								</el-icon>
+								性别
+							</div>
+						</template>
+						女
+					</el-descriptions-item>
+
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Tickets />
+								</el-icon>
+								套餐类型
+							</div>
+						</template>
+						23东软家属已婚女士套餐D
+					</el-descriptions-item>
+
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Tickets />
+								</el-icon>
+								体验日期
+							</div>
+						</template>
+						2023-10-12
+					</el-descriptions-item>
+
+				</el-descriptions>
+
+			</div>
+
+			<div>
+				<h4>检查录入</h4>
+				<el-collapse v-model="activeNames" @change="handleChange">
+					<el-collapse-item title="一般检查基础项目" name="1">
+						<div>
+
+							<el-descriptions class="margin-top" :column="2" :size="size" border>
+								<el-descriptions-item>
+									<template #label>
+										<div class="cell-item">
+											<el-icon :style="iconStyle">
+												<Tickets />
+											</el-icon>
+											身高
+										</div>
+									</template>
+									<div style="display: flex;justify-content: center;align-items: center;">
+										<el-input placeholder="请输入身高"></el-input> &nbsp;&nbsp;cm&nbsp;&nbsp; <el-tag
+											size="small">正常值范围：-</el-tag>
+									</div>
+								</el-descriptions-item>
+
+								<el-descriptions-item>
+									<template #label>
+										<div class="cell-item">
+											<el-icon :style="iconStyle">
+												<Tickets />
+											</el-icon>
+											体重
+										</div>
+									</template>
+									<div style="display: flex;justify-content: center;align-items: center;">
+										<el-input placeholder="请输入体重"></el-input> &nbsp;&nbsp;kg&nbsp;&nbsp; <el-tag
+											size="small">正常值范围：-</el-tag>
+									</div>
+								</el-descriptions-item>
+
+
+								<el-descriptions-item>
+									<template #label>
+										<div class="cell-item">
+											<el-icon :style="iconStyle">
+												<Tickets />
+											</el-icon>
+											体重指数
+										</div>
+									</template>
+									<div style="display: flex;align-items: center;">
+										<span style="color: orange;">22.9</span>&nbsp;&nbsp; <el-tag
+											size="small">正常值范围：-</el-tag> &nbsp;&nbsp;<el-button
+											type="danger">异</el-button>
+									</div>
+								</el-descriptions-item>
+
+								<el-descriptions-item>
+									<template #label>
+										<div class="cell-item">
+											<el-icon :style="iconStyle">
+												<Tickets />
+											</el-icon>
+											脉搏
+										</div>
+									</template>
+									<div style="display: flex;justify-content: center;align-items: center;">
+										<el-input placeholder="请输入脉搏"></el-input> <span
+											style="text-wrap: nowrap;">&nbsp;&nbsp;次/分钟&nbsp;&nbsp;</span> <el-tag
+											size="small">正常值范围：-</el-tag>
+									</div>
+								</el-descriptions-item>
+
+								<el-descriptions-item>
+									<template #label>
+										<div class="cell-item">
+											<el-icon :style="iconStyle">
+												<Tickets />
+											</el-icon>
+											收缩压
+										</div>
+									</template>
+									<div style="display: flex;justify-content: center;align-items: center;">
+										<el-input placeholder="请输入收缩压"></el-input> &nbsp;&nbsp; <el-tag
+											size="small">正常值范围：-</el-tag>
+									</div>
+								</el-descriptions-item>
+
+								<el-descriptions-item>
+									<template #label>
+										<div class="cell-item">
+											<el-icon :style="iconStyle">
+												<Tickets />
+											</el-icon>
+											舒张压
+										</div>
+									</template>
+									<div style="display: flex;justify-content: center;align-items: center;">
+										<el-input placeholder="请输入舒张压"></el-input> &nbsp;&nbsp; <el-tag
+											size="small">正常值范围：-</el-tag>
+									</div>
+								</el-descriptions-item>
+
+							</el-descriptions>
+
+						</div>
+					</el-collapse-item>
+				</el-collapse>
+
+			</div>
+
+			<div>
+				<h5>科室小结</h5>
+				<el-descriptions class="margin-top" :column="1" :size="size" border>
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Tickets />
+								</el-icon>
+								科室小结
+							</div>
+						</template>
+						<el-input type="textarea" placeholder="科室小结：超重"></el-input>
+					</el-descriptions-item>
+
+				</el-descriptions>
+
+			</div>
+
+			<div>
+				<h5>责任医生</h5>
+				<el-descriptions class="margin-top" :column="3" :size="size" border>
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Tickets />
+								</el-icon>
+								录入医师
+							</div>
+						</template>
+						<el-input placeholder="请输入身高"></el-input>
+					</el-descriptions-item>
+
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+								<el-icon :style="iconStyle">
+									<Tickets />
+								</el-icon>
+								责任医师
+							</div>
+						</template>
+						<el-input placeholder="请输入体重"></el-input>
+					</el-descriptions-item>
+
+					<el-descriptions-item>
+						<template #label>
+							<div class="cell-item">
+
+							</div>
+						</template>
+						<el-button type="primary">一般检查基础项数据保存</el-button>
+					</el-descriptions-item>
+
+				</el-descriptions>
+
+			</div>
+
+			<div>
+				<el-collapse v-model="activeNames" @change="handleChange">
+					<el-collapse-item title="视力+辨色力" name="1">
+						<div>
+
+							<el-descriptions class="margin-top" :column="2" :size="size" border>
+								<el-descriptions-item>
+									<template #label>
+										<div class="cell-item">
+											<el-icon :style="iconStyle">
+												<Tickets />
+											</el-icon>
+											色觉检查
+										</div>
+									</template>
+									<el-select placeholder="输入正确数据"></el-select>
+								</el-descriptions-item>
+
+								<el-descriptions-item>
+									<template #label>
+										<div class="cell-item">
+
+										</div>
+									</template>
+
+								</el-descriptions-item>
+
+
+
+						</div>
+					</el-collapse-item>
+				</el-collapse>
+
+			</div>
+		</div>
+
+	</body>
+	<script>
+		const App = {
+			data() {
+				return {
+					form: {},
+					username: '',
+					phone: '',
+					brithday: '',
+					idCard: '',
+					address: ''
+				}
+			},
+			methods: {}
+		};
+		const app = Vue.createApp(App);
+		app.use(ElementPlus);
+		// 引用icon图标
+		app.component("Phone", ElementPlusIconsVue.Phone);
+		app.component("Location", ElementPlusIconsVue.Location);
+		app.component("Document", ElementPlusIconsVue.Document);
+		app.component("Setting", ElementPlusIconsVue.Setting);
+		app.component("Service", ElementPlusIconsVue.Service);
+		app.component("User", ElementPlusIconsVue.User);
+		app.component("Iphone", ElementPlusIconsVue.Iphone);
+		app.component("Tickets", ElementPlusIconsVue.Tickets);
+		app.component("Calendar", ElementPlusIconsVue.Calendar);
+		app.component("Postcard", ElementPlusIconsVue.Postcard);
+		app.component("Male", ElementPlusIconsVue.Male);
+		app.mount("#app");
+	</script>
+</html>
